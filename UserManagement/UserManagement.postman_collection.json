@@ -1,0 +1,98 @@
+{
+  "info": {
+    "name": "Task Management API",
+    "_postman_id": "12345abcde-task-api",
+    "description": "Postman collection for Django Task Management API with Token Authentication and CRUD.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000" },
+    { "key": "auth_token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"testpass\",\n  \"email\": \"test@example.com\"\n}"
+        },
+        "url": { "raw": "{{base_url}}/api/auth/register/", "host": ["{{base_url}}"], "path": ["api", "auth", "register", ""] }
+      }
+    },
+    {
+      "name": "Login User (Get Token)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"testpass\"\n}"
+        },
+        "url": { "raw": "{{base_url}}/api/auth/login/", "host": ["{{base_url}}"], "path": ["api", "auth", "login", ""] }
+      }
+    },
+    {
+      "name": "List Tasks",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Token {{auth_token}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": { "raw": "{{base_url}}/api/tasks/listtask/", "host": ["{{base_url}}"], "path": ["api", "tasks", "listtask", ""] }
+      }
+    },
+    {
+      "name": "Create Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Token {{auth_token}}" }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "title", "value": "Test Task", "type": "text" },
+            { "key": "description", "value": "Task created from Postman", "type": "text" },
+            { "key": "attachment", "type": "file", "src": "" }
+          ]
+        },
+        "url": { "raw": "{{base_url}}/api/tasks/createtask/", "host": ["{{base_url}}"], "path": ["api", "tasks", "createtask", ""] }
+      }
+    },
+    {
+      "name": "Update Task",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Token {{auth_token}}" }],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "title", "value": "Updated Task Title", "type": "text" },
+            { "key": "description", "value": "Updated Description", "type": "text" }
+          ]
+        },
+        "url": { "raw": "{{base_url}}/api/tasks/updatetask/1/", "host": ["{{base_url}}"], "path": ["api", "tasks", "updatetask", "1", ""] }
+      }
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Authorization", "value": "Token {{auth_token}}" }],
+        "url": { "raw": "{{base_url}}/api/tasks/deletetask/1/", "host": ["{{base_url}}"], "path": ["api", "tasks", "deletetask", "1", ""] }
+      }
+    },
+    {
+      "name": "Logout User",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Token {{auth_token}}" }],
+        "url": { "raw": "{{base_url}}/api/auth/logout/", "host": ["{{base_url}}"], "path": ["api", "auth", "logout", ""] }
+      }
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Create / Update Task</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<!-- Fonts and Icons -->
+	<link rel="stylesheet" type="text/css" href="{% static 'tasks/create/css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'tasks/create/css/montserrat-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'tasks/create/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+	
+	<!-- Main Style -->
+    <link rel="stylesheet" href="{% static 'tasks/create/css/style.css' %}"/>
+</head>
+
+<body>
+	<div class="page-content">
+		<div class="wizard-heading">TASK MANAGEMENT</div>
+		<div class="wizard-v7-content">
+			<div class="wizard-form">
+		        <form class="form-register" action="{% url 'createtask' %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+		        	<div id="form-total">
+
+		        		<h2>
+			            	<p class="step-icon"><span>1</span></p>
+			            	<div class="step-text">
+			            		<span class="step-inner-1">Task Creation</span>
+			            		<span class="step-inner-2">Enter Task Details</span>
+			            	</div>
+			            </h2>
+
+			            <section>
+			                <div class="inner">
+			                	<div class="wizard-header">
+									<h3 class="heading">Create a Task</h3>
+									<p>Please fill in the task details below.</p>
+								</div>
+
+								<!-- Title -->
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label for="title">Title</label>
+										<input type="text" name="title" id="title" class="form-control" placeholder="Enter task title" required>
+									</div>
+								</div>
+
+								<!-- Description -->
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label for="description">Description</label>
+										<textarea name="description" id="description" rows="4" class="form-control" placeholder="Enter task description" required></textarea>
+									</div>
+								</div>
+
+								<!-- Attachment -->
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label for="attachment">Attachment (optional)</label>
+										<input type="file" name="attachment" id="attachment" class="form-control">
+									</div>
+								</div>
+
+								<!-- Auto Fields (readonly) -->
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label for="created_at">Created At</label>
+										<input type="text" id="created_at" class="form-control" value="{{ task.created_at|default:'Auto-generated after save' }}" readonly>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label for="modified_at">Modified At</label>
+										<input type="text" id="modified_at" class="form-control" value="{{ task.modified_at|default:'Auto-updated after save' }}" readonly>
+									</div>
+								</div>
+
+								<!-- Submit -->
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<button type="submit" class="btn btn-primary">Save Task</button>
+									</div>
+								</div>
+							</div>
+			            </section>
+
+		        	</div>
+		        </form>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS Files -->
+	<script src="{% static 'tasks/create/js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'tasks/create/js/jquery.steps.js' %}"></script>
+	<script src="{% static 'tasks/create/js/main.js' %}"></script>
+</body>
+</html>

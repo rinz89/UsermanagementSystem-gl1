@@ -1,0 +1,83 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Task List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'tasks/list/css/style.css' %}">
+  </head>
+  
+  <body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Task List</h2>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="col text-end">
+					<a href="{% url 'createtask' %}" class="btn btn-success">Add New Task</a>
+					<a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table">
+						  <thead class="thead-primary">
+						    <tr>
+						      <th>#</th>
+						      <th>Title</th>
+						      <th>Description</th>
+						      <th>Created At</th>
+						      <th>Modified At</th>
+						      <th>Attachment</th>
+						      <th>Actions</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    {% for task in tasks %}
+						    <tr>
+						      <th scope="row">{{ forloop.counter }}</th>
+						      <td>{{ task.title }}</td>
+						      <td>{{ task.description }}</td>
+						      <td>{{ task.created_at|date:"Y-m-d H:i" }}</td>
+						      <td>{{ task.modified_at|date:"Y-m-d H:i" }}</td>
+						      <td>
+						      	{% if task.attachment %}
+						      		<a href="{{ task.attachment.url }}" target="_blank" class="btn btn-sm btn-info">View</a>
+						      	{% else %}
+						      		<span class="text-muted">No File</span>
+						      	{% endif %}
+						      </td>
+						      <td>
+						        <a href="{% url 'updatetask' task.id %}" class="btn btn-primary btn-sm">Update</a>
+						        <a href="{% url 'deletetask' task.id %}" class="btn btn-danger btn-sm">Delete</a>
+						      </td>
+						    </tr>
+						    {% empty %}
+						    <tr>
+						      <td colspan="7" class="text-center">No tasks found.</td>
+						    </tr>
+						    {% endfor %}
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="{% static 'tasks/list/js/jquery.min.js' %}"></script>
+  	<script src="{% static 'tasks/list/js/popper.js' %}"></script>
+  	<script src="{% static 'tasks/list/js/bootstrap.min.js' %}"></script>
+  	<script src="{% static 'tasks/list/js/main.js' %}"></script>
+  </body>
+</html>

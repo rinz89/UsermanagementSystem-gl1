@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v8 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="static/users/Register/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+		
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="static/users/Register/css/style.css">
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<div class="image-holder">
+				<img src="static/users/Register/images/registration-form-8.jpg" alt="">
+			</div>
+
+			<div class="form-inner">
+				<form action="{% url 'reg' %}" method="post">
+					{% csrf_token %}
+					
+					<!-- ✅ Django messages display -->
+					<!-- {% if messages %}
+						{% for message in messages %}
+							<div style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};
+										text-align:center; 
+										font-weight:bold;
+										margin-bottom:10px;">
+								{{ message }} -->
+							</div>
+						<!-- {% endfor %}
+					{% endif %} -->
+					<!-- ✅ End of messages -->
+
+					<div class="form-header">
+						<h3>Register</h3>
+						<img src="static/users/Register/images/sign-up.png" alt="" class="sign-up-icon">
+					</div>
+
+					<div class="form-group">
+						<label>Username:</label>
+						<input type="text" class="form-control" name="username"
+							   data-validation="length alphanumeric" data-validation-length="3-12" required>
+					</div>
+
+					<div class="form-group">
+						<label>E-mail:</label>
+						<input type="email" class="form-control" name="email" data-validation="email" required>
+					</div>
+
+					<div class="form-group">
+						<label>Password:</label>
+						<input type="password" class="form-control" name="password"
+							   data-validation="length" data-validation-length="min8" required>
+					</div>
+
+					<button>Register</button>
+
+					<div class="socials">
+						<p>Sign up with social platforms</p>
+						<a href="#" class="socials-icon"><i class="zmdi zmdi-facebook"></i></a>
+						<a href="#" class="socials-icon"><i class="zmdi zmdi-instagram"></i></a>
+						<a href="#" class="socials-icon"><i class="zmdi zmdi-twitter"></i></a>
+						<a href="#" class="socials-icon"><i class="zmdi zmdi-tumblr"></i></a>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<script src="static/users/Register/js/jquery-3.3.1.min.js"></script>
+		<script src="static/users/Register/js/jquery.form-validator.min.js"></script>
+		<script src="static/users/Register/js/main.js"></script>
+	</body>
+</html>
