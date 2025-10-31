@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: usermanagement
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: gunicorn UserManagement.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: UserManagement.settings
+      - key: PYTHON_VERSION
+        value: 3.11.4
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+databases:
+  - name: usermanagement_db
