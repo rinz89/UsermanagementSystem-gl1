@@ -39,5 +39,5 @@ This project provides user registration, authentication (token-based), and CRUD 
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/UserManagementProject.git
+git clone https://github.com/rinz89/UsermanagementSystem-gl1
 cd UserManagementProject
